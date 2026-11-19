@@ -1,0 +1,755 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOLAR SPHERE - Explore the Universe</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080d1c;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* NAVIGATION */
+header {
+    background: #101a32;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.4);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #ffbd59;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 22px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ffbd59;
+}
+
+/* HERO */
+.hero {
+    min-height: 500px;
+    background: linear-gradient(rgba(4,10,28,0.65), rgba(4,10,28,0.8)),
+    url("art.jpeg") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero-content h1 {
+    font-size: 55px;
+    color: #ffbd59;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 19px;
+    max-width: 700px;
+    margin: auto;
+}
+
+.hero button {
+    margin-top: 25px;
+    padding: 13px 30px;
+    background: #ffbd59;
+    color: #101a32;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hero button:hover {
+    background: white;
+    transform: scale(1.05);
+}
+
+/* GENERAL SECTIONS */
+section {
+    padding: 65px 8%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    color: #ffbd59;
+    margin-bottom: 35px;
+}
+
+.section-description {
+    text-align: center;
+    max-width: 750px;
+    margin: -20px auto 35px;
+    color: #c7d2e8;
+}
+
+/* PLANETS */
+.planet-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.planet-card {
+    background: #14213d;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #263b62;
+    transition: 0.3s;
+}
+
+.planet-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(255,189,89,0.15);
+}
+
+.planet-card h3 {
+    color: #ffbd59;
+    margin: 12px 0;
+}
+
+.planet-icon {
+    font-size: 55px;
+}
+
+.planet-card p {
+    color: #c7d2e8;
+}
+
+.planet-card button {
+    margin-top: 15px;
+    padding: 9px 18px;
+    background: #ffbd59;
+    color: #101a32;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* ABOUT */
+.about {
+    background: #101a32;
+    text-align: center;
+}
+
+.about-content {
+    max-width: 850px;
+    margin: auto;
+    color: #d4def0;
+}
+
+/* GALLERY */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+}
+
+.gallery-item {
+    background: #14213d;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.03);
+}
+
+.gallery-item p {
+    text-align: center;
+    padding: 10px;
+    color: #ffbd59;
+}
+
+/* MEDIA */
+.media-section {
+    background: #101a32;
+}
+
+.media-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.media-box {
+    background: #14213d;
+    padding: 22px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.media-box h3 {
+    color: #ffbd59;
+    margin-bottom: 18px;
+}
+
+.media-box audio,
+.media-box video {
+    width: 100%;
+}
+
+/* DISCOVERY */
+.discovery {
+    text-align: center;
+}
+
+.discovery-box {
+    background: #14213d;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 750px;
+    margin: auto;
+}
+
+.discovery-box button {
+    padding: 11px 22px;
+    background: #ffbd59;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#planetResult {
+    margin-top: 20px;
+    color: #d4def0;
+}
+
+/* CONTACT FORM */
+.contact {
+    background: #101a32;
+}
+
+form {
+    max-width: 550px;
+    margin: auto;
+    background: #14213d;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    color: #ffbd59;
+}
+
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    border: 1px solid #405477;
+    border-radius: 7px;
+    background: #080d1c;
+    color: white;
+}
+
+form button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+    border: none;
+    background: #ffbd59;
+    color: #101a32;
+    font-weight: bold;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: white;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    background: #070b16;
+    padding: 25px;
+    color: #aab8d0;
+}
+
+footer span {
+    color: #ffbd59;
+}
+
+/* IMAGE MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding: 50px 15px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.92);
+    text-align: center;
+}
+
+.modal img {
+    max-width: 85%;
+    max-height: 80vh;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    font-size: 40px;
+    cursor: pointer;
+    color: white;
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    nav a {
+        margin: 0;
+    }
+
+    .hero-content h1 {
+        font-size: 38px;
+    }
+
+    section {
+        padding: 45px 5%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<header>
+    <div class="logo">☀ SOLAR SPHERE</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#planets">Planets</a>
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#media">Media</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<!-- HOME -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>EXPLORE THE UNIVERSE</h1>
+        <p>
+            Welcome to Solar Sphere, your gateway to discovering the
+            wonders of our solar system, planets, stars and galaxies.
+        </p>
+        <button onclick="document.getElementById('planets').scrollIntoView()">
+            Explore Planets
+        </button>
+    </div>
+</section>
+
+<!-- PLANETS -->
+<section id="planets">
+    <h2 class="section-title">Our Solar System</h2>
+
+    <p class="section-description">
+        Discover the eight planets that orbit our Sun.
+        Each planet has its own unique features and mysteries.
+    </p>
+
+    <div class="planet-container">
+
+        <div class="planet-card">
+            <div class="planet-icon">🌑</div>
+            <h3>Mercury</h3>
+            <p>The smallest planet and the closest to the Sun.</p>
+            <button onclick="showPlanet('Mercury', 'Mercury is the smallest planet in our solar system. It has extreme temperature changes.')">Learn More</button>
+        </div>
+
+        <div class="planet-card">
+            <div class="planet-icon">🟠</div>
+            <h3>Venus</h3>
+            <p>The hottest planet with a thick atmosphere.</p>
+            <button onclick="showPlanet('Venus', 'Venus is the hottest planet because of its thick atmosphere and greenhouse effect.')">Learn More</button>
+        </div>
+
+        <div class="planet-card">
+            <div class="planet-icon">🌍</div>
+            <h3>Earth</h3>
+            <p>Our home planet and the only known planet with life.</p>
+            <button onclick="showPlanet('Earth', 'Earth is the only known planet that supports life. It contains liquid water and a protective atmosphere.')">Learn More</button>
+        </div>
+
+        <div class="planet-card">
+            <div class="planet-icon">🔴</div>
+            <h3>Mars</h3>
+            <p>The Red Planet, known for its dusty surface.</p>
+            <button onclick="showPlanet('Mars', 'Mars is called the Red Planet because of iron oxide on its surface. Scientists study it for signs of ancient life.')">Learn More</button>
+        </div>
+
+        <div class="planet-card">
+            <div class="planet-icon">🟤</div>
+            <h3>Jupiter</h3>
+            <p>The largest planet in our solar system.</p>
+            <button onclick="showPlanet('Jupiter', 'Jupiter is the largest planet. It is famous for its Great Red Spot, a giant storm.')">Learn More</button>
+        </div>
+
+        <div class="planet-card">
+            <div class="planet-icon">🪐</div>
+            <h3>Saturn</h3>
+            <p>Famous for its beautiful ring system.</p>
+            <button onclick="showPlanet('Saturn', 'Saturn is a gas giant famous for its spectacular rings made mostly of ice and rocky particles.')">Learn More</button>
+        </div>
+
+        <div class="planet-card">
+            <div class="planet-icon">🔵</div>
+            <h3>Uranus</h3>
+            <p>An ice giant that rotates on its side.</p>
+            <button onclick="showPlanet('Uranus', 'Uranus is an ice giant with a blue-green appearance and an unusual sideways rotation.')">Learn More</button>
+        </div>
+
+        <div class="planet-card">
+            <div class="planet-icon">🔷</div>
+            <h3>Neptune</h3>
+            <p>A distant planet with powerful winds.</p>
+            <button onclick="showPlanet('Neptune', 'Neptune is the farthest planet from the Sun and is known for its strong winds and deep blue colour.')">Learn More</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+    <h2 class="section-title">About Solar Sphere</h2>
+
+    <div class="about-content">
+        <p>
+            Solar Sphere is an educational website designed to make
+            space exploration interesting and easy to understand.
+            It introduces visitors to the planets, the Sun and the
+            fascinating world beyond Earth.
+        </p>
+
+        <br>
+
+        <p>
+            Our goal is to encourage curiosity about astronomy and
+            inspire everyone to learn more about the universe.
+        </p>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+    <h2 class="section-title">Space Gallery</h2>
+
+    <p class="section-description">
+        Explore amazing space images and celestial wonders.
+        Click an image to view it in a larger format.
+    </p>
+
+    <div class="gallery-container">
+
+        <div class="gallery-item">
+            <img src="img1.png" data-full="img1.png" alt="Space image 1" onclick="openImage(this)">
+            <p>Galaxy Exploration</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="img2.png" data-full="img2.png" alt="Space image 2" onclick="openImage(this)">
+            <p>Planetary System</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="img3.png" data-full="img3.png" alt="Space image 3" onclick="openImage(this)">
+            <p>Deep Space</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="img4.png" data-full="img4.png" alt="Space image 4" onclick="openImage(this)">
+            <p>Cosmic Wonders</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="img5.png" data-full="img5.png" alt="Space image 5" onclick="openImage(this)">
+            <p>Solar Discovery</p>
+        </div>
+
+        <div class="gallery-item">
+            <img src="img6.png" data-full="img6.png" alt="Space image 6" onclick="openImage(this)">
+            <p>Universe Beyond</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- IMAGE MODAL -->
+<div class="modal" id="imageModal" onclick="closeImage()">
+    <span class="close">&times;</span>
+    <img id="modalImage" src="" alt="Expanded space image">
+</div>
+
+<!-- AUDIO AND VIDEO -->
+<section class="media-section" id="media">
+    <h2 class="section-title">Space Media</h2>
+
+    <p class="section-description">
+        Experience the universe through audio and video.
+    </p>
+
+    <div class="media-container">
+
+        <div class="media-box">
+            <h3>Space Audio</h3>
+
+            <audio controls>
+                <source src="audio.mpeg" type="audio/mpeg">
+                Your browser does not support audio.
+            </audio>
+
+            <p>Listen to the sounds of space exploration.</p>
+        </div>
+
+        <div class="media-box">
+            <h3>Space Video</h3>
+
+            <video controls width="100%">
+                <source src="video.mp4" type="video/mp4">
+                Your browser does not support video.
+            </video>
+
+            <p>Watch the wonders of our universe.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- JAVASCRIPT DOM MANIPULATION -->
+<section class="discovery">
+    <h2 class="section-title">Planet Discovery</h2>
+
+    <div class="discovery-box">
+        <h3>Discover a Planet</h3>
+
+        <p>
+            Click the button below to discover an interesting
+            fact about our solar system.
+        </p>
+
+        <button onclick="randomFact()">Discover Now</button>
+
+        <p id="planetResult">
+            Your discovery will appear here.
+        </p>
+    </div>
+</section>
+
+<!-- FETCH API -->
+<section>
+    <h2 class="section-title">Space Information</h2>
+
+    <div class="discovery-box">
+        <h3>Explore Space Data</h3>
+
+        <p>
+            Click below to load information about a planet
+            using the JavaScript Fetch API.
+        </p>
+
+        <button onclick="loadSpaceData()">Load Planet Data</button>
+
+        <div id="spaceData">
+            <p>Planet information will appear here.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="contact" id="contact">
+    <h2 class="section-title">Contact Us</h2>
+
+    <form id="contactForm">
+
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+
+        <label for="interest">Area of Interest</label>
+        <select id="interest" required>
+            <option value="">Select an option</option>
+            <option>Planets</option>
+            <option>Stars</option>
+            <option>Galaxies</option>
+            <option>Space Exploration</option>
+        </select>
+
+        <label for="message">Your Message</label>
+        <textarea id="message" rows="5" placeholder="Enter your message" required></textarea>
+
+        <button type="submit">Submit</button>
+
+    </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 <span>SOLAR SPHERE</span> | Explore Beyond the Stars</p>
+    <p>Discover • Learn • Explore</p>
+</footer>
+
+<script>
+
+/* PLANET INFORMATION */
+function showPlanet(name, information) {
+    alert(name + "\n\n" + information);
+}
+
+/* RANDOM SPACE FACTS */
+function randomFact() {
+
+    const facts = [
+        "The Sun contains most of the mass of our solar system.",
+        "Jupiter is the largest planet in our solar system.",
+        "A day on Venus is longer than its year.",
+        "Neptune has extremely powerful winds.",
+        "Saturn's rings are made mostly of ice and rocky particles.",
+        "Mars has the largest volcano in the solar system.",
+        "Earth is the only known planet with life."
+    ];
+
+    let randomNumber = Math.floor(Math.random() * facts.length);
+
+    document.getElementById("planetResult").innerHTML =
+        facts[randomNumber];
+}
+
+/* IMAGE GALLERY */
+function openImage(image) {
+
+    document.getElementById("imageModal").style.display = "block";
+
+    document.getElementById("modalImage").src =
+        image.getAttribute("data-full");
+}
+
+function closeImage() {
+    document.getElementById("imageModal").style.display = "none";
+}
+
+/* CONTACT FORM */
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    let name = document.getElementById("name").value;
+
+    alert("Thank you, " + name + "! Your message has been submitted.");
+
+    this.reset();
+});
+
+/* FETCH API */
+async function loadSpaceData() {
+
+    let output = document.getElementById("spaceData");
+
+    output.innerHTML = "<p>Loading planet information...</p>";
+
+    try {
+
+        const response = await fetch(
+            "https://api.le-systeme-solaire.net/rest/bodies/"
+        );
+
+        if (!response.ok) {
+            throw new Error("Unable to load data");
+        }
+
+        const data = await response.json();
+
+        let planets = data.bodies.filter(function(body) {
+            return body.isPlanet === true;
+        });
+
+        let selectedPlanet = planets[
+            Math.floor(Math.random() * planets.length)
+        ];
+
+        output.innerHTML =
+            "<h3>" + selectedPlanet.englishName + "</h3>" +
+            "<p>Planet type: " + selectedPlanet.bodyType + "</p>" +
+            "<p>Gravity: " + selectedPlanet.gravity + " m/s²</p>" +
+            "<p>Mean radius: " + selectedPlanet.meanRadius + " km</p>";
+
+    } catch (error) {
+
+        output.innerHTML =
+            "<p>Unable to load space data. Please check your internet connection and try again.</p>";
+
+    }
+}
+
+</script>
+
+</body>
+</html>
